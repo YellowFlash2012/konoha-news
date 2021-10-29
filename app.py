@@ -1,14 +1,16 @@
-from flask import Flask
+from flask import Flask, render_template
+from posts import posts
 
 app = Flask(__name__)
 
 @app.route('/')
+@app.route('/home')
 def home():
-    return "<h1>hello world</h1>"
+    return render_template("index.html", posts=posts)
 
 @app.route('/about')
 def about():
-    return "<h1>About us</h1>"
+    return render_template("about.html")
 
 
 
