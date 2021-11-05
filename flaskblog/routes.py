@@ -15,7 +15,8 @@ from werkzeug.utils import redirect
 @app.route('/')
 @app.route('/home')
 def home():
-    posts = Post.query.all()
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template("index.html", posts=posts)
 
 
@@ -115,9 +116,8 @@ def new_post():
 @app.route('/post/<int:post_id>')
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    image_file = url_for(
-        'static', filename='profile_pics/' + current_user.image_file)
-    return render_template('post.html', title=post.title, post=post, image_file=image_file)
+    
+    return render_template('post.html', title=post.title, post=post)
 
 
 @app.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
@@ -152,3 +152,12 @@ def delete_post(post_id):
     db.session.commit()
     flash('Post sucessfully deleted', 'success')
     return redirect(url_for('home'))
+
+
+
+@app.route('/author/<string:username>')
+def author_posts(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template("author_posts.html", posts=posts, author=user)
