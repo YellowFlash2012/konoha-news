@@ -5,3 +5,7 @@ secrets.token_hex(16)
 
 ========================
 Ctrl+Shift+P (Command+Shift+P) and type Python: Start REPL. Click the command, and you'll get a interactive Python console.
+
+========================
+to open bash_profile:
+code ~/.bash_profile
