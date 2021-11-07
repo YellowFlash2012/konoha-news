@@ -1,11 +1,14 @@
-to generate secret key:
-open python idle
-import secrets
-secrets.token_hex(16)
 
-========================
-Ctrl+Shift+P (Command+Shift+P) and type Python: Start REPL. Click the command, and you'll get a interactive Python console.
+This project is inspired by Corey Schafer Flaskblog tutorial.
 
-========================
-to open bash_profile:
-code ~/.bash_profile
+Front end: html, CSS, javascript, Bootstrap
+Backend: python/flask
+database: SQLite for development, Postgresql for production
+
+A simple blog web app where users:
+- can register
+- login
+- reset their password
+- create blog posts
+- update blogposts
+- delete blog posts
